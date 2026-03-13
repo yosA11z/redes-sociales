@@ -16,176 +16,218 @@
 
 <body>
 
-    <div class="nav-container">
-        <nav class="nav-glass expanded" id="mainNav">
-            <a href="#timelineSection" class="nav-item">
-                <i data-lucide="layout-grid" class="nav-icon"></i>
-                <div class="nav-text-container"><span class="full-text">Cronología</span></div>
-            </a>
-            <a href="#psicologia" class="nav-item">
-                <i data-lucide="brain" class="nav-icon"></i>
-                <div class="nav-text-container"><span class="full-text">Impacto</span></div>
-            </a>
-            <a href="#videojuego" class="nav-item">
-                <i data-lucide="gamepad-2" class="nav-icon"></i>
-                <div class="nav-text-container"><span class="full-text">Simulador</span></div>
-            </a>
-            <a href="#final" class="nav-item">
-                <i data-lucide="help-circle" class="nav-icon"></i>
-                <div class="nav-text-container"><span class="full-text">Quizz</span></div>
-            </a>
-        </nav>
+    <!-- =============================================
+     LOADER SCREEN
+============================================= -->
+    <div id="loader-screen">
+        <div class="loader-inner">
+            <svg class="apple-logo-svg" id="loaderLogo" viewBox="0 0 512 512">
+                <path
+                    d="M388.53 266.05c-.25-65.29 53.43-96.49 55.88-98.13-30.34-44.31-77.47-50.33-94.21-50.99-40.06-4.07-78.14 23.58-98.44 23.58-20.3 0-51.78-23.1-85.11-22.45-43.83.65-84.23 25.54-106.82 64.8-45.54 79.16-11.64 196.41 32.72 260.6 21.69 31.42 47.53 66.58 81.41 65.31 32.58-1.22 44.88-20.94 84.15-20.94 39.27 0 50.41 20.94 84.58 20.29 34.82-.65 57.19-31.54 78.68-62.94 24.81-36.25 35.02-71.37 35.25-73.23-.74-.32-67.93-26.11-68.1-103.9zM304.5 94.62c18.06-21.88 30.22-52.19 26.9-82.62-26.15 1.05-57.81 17.41-76.56 39.29-16.8 19.36-31.48 50.4-27.52 79.8 29.17 2.27 59.12-14.59 77.18-36.47z" />
+            </svg>
+            <div class="loader-bar-wrap" id="loaderBarWrap">
+                <div class="loader-bar-fill" id="loaderBar"></div>
+            </div>
+            <div class="loader-status" id="loaderStatus">Iniciando...</div>
+        </div>
     </div>
 
-    <header class="hero">
-        <div class="hero-mesh"></div>
-        <h1 id="heroTitle">Viviendo en<br>la Red.</h1>
-        <p id="heroSub"
-            class="text-gray-400 text-xl md:text-2xl font-medium tracking-tight opacity-0 mt-8 relative z-10">
-            La cronología del impacto social digital.
-        </p>
-    </header>
+    <!-- "Bienvenido." overlay -->
+    <div id="welcome-screen">
+        <span class="welcome-word" id="welcomeWord">Bienvenido.</span>
+    </div>
 
-    <main class="timeline-section" id="timelineSection">
-        <div class="progress-container">
-            <div class="progress-bar" id="progressBar"></div>
+    <!-- =============================================
+     MAIN PAGE
+============================================= -->
+    <div id="page-content">
+
+        <div class="nav-container">
+            <nav class="nav-glass expanded" id="mainNav">
+                <a href="#timelineSection" class="nav-item">
+                    <i data-lucide="layout-grid" class="nav-icon"></i>
+                    <div class="nav-text-container"><span class="full-text">Cronología</span></div>
+                </a>
+                <a href="#psicologia" class="nav-item">
+                    <i data-lucide="brain" class="nav-icon"></i>
+                    <div class="nav-text-container"><span class="full-text">Impacto</span></div>
+                </a>
+                <a href="#videojuego" class="nav-item">
+                    <i data-lucide="gamepad-2" class="nav-icon"></i>
+                    <div class="nav-text-container"><span class="full-text">Simulador</span></div>
+                </a>
+                <a href="#final" class="nav-item">
+                    <i data-lucide="help-circle" class="nav-icon"></i>
+                    <div class="nav-text-container"><span class="full-text">Quizz</span></div>
+                </a>
+            </nav>
         </div>
-        <div id="timelineContent"></div>
-    </main>
 
-    <!-- ANÁLISIS PSICOLÓGICO -->
-    <section id="psicologia" class="py-32 px-6">
-        <div class="max-w-6xl mx-auto glass-card text-center border-t-2 border-blue-500/20">
-            <div class="mb-16">
-                <h2 class="text-5xl md:text-8xl font-black tracking-tighter mb-6 text-white">Mente en Red.</h2>
-                <p class="text-gray-400 text-lg md:text-xl max-w-2xl mx-auto">El impacto no es solo social, es
-                    biológico. Analizamos cómo las redes reescriben tus circuitos neuronales.</p>
-            </div>
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-16">
-                <div class="psy-grid-item">
-                    <div class="w-10 h-10 bg-blue-500/20 rounded-lg flex items-center justify-center mb-6"><i
-                            data-lucide="eye" class="text-blue-500"></i></div>
-                    <h3 class="text-xl font-bold mb-3 text-white">Dismorfia Digital</h3>
-                    <p class="text-sm text-gray-500 leading-relaxed">Filtros que crean estándares inalcanzables,
-                        afectando la autoimagen real del usuario.</p>
-                </div>
-                <div class="psy-grid-item">
-                    <div class="w-10 h-10 bg-purple-500/20 rounded-lg flex items-center justify-center mb-6"><i
-                            data-lucide="zap" class="text-purple-500"></i></div>
-                    <h3 class="text-xl font-bold mb-3 text-white">Dopamina Hackeada</h3>
-                    <p class="text-sm text-gray-500 leading-relaxed">Micro-recompensas infinitas que generan dependencia
-                        al scroll y a la validación.</p>
-                </div>
-                <div class="psy-grid-item">
-                    <div class="w-10 h-10 bg-red-500/20 rounded-lg flex items-center justify-center mb-6"><i
-                            data-lucide="shield-alert" class="text-red-500"></i></div>
-                    <h3 class="text-xl font-bold mb-3 text-white">Aislamiento</h3>
-                    <p class="text-sm text-gray-500 leading-relaxed">Conexión superficial que debilita los vínculos
-                        físicos y la empatía real.</p>
-                </div>
-            </div>
-            <a href="/html/consecuencias.html"
-                class="inline-block border border-zinc-800 hover:border-white px-8 py-3 rounded-full transition-all text-sm font-bold uppercase tracking-widest text-white">Explorar
-                Análisis Completo</a>
-        </div>
-    </section>
+        <header class="hero">
+            <div class="hero-mesh"></div>
+            <h1 id="heroTitle">Viviendo en<br>la Red.</h1>
+            <p id="heroSub"
+                class="text-gray-400 text-xl md:text-2xl font-medium tracking-tight opacity-0 mt-8 relative z-10">
+                La cronología del impacto social digital.
+            </p>
+        </header>
 
-    <!-- VIDEOJUEGO -->
-    <section id="videojuego" class="py-24 px-6">
-        <div class="max-w-7xl mx-auto">
-            <div class="console-ui">
-                <div
-                    class="absolute -top-24 -right-24 w-96 h-96 bg-blue-600/10 blur-[120px] rounded-full pointer-events-none">
+        <main class="timeline-section" id="timelineSection">
+            <div class="progress-container">
+                <div class="progress-bar" id="progressBar"></div>
+            </div>
+            <div id="timelineContent"></div>
+        </main>
+
+        <!-- ANÁLISIS PSICOLÓGICO -->
+        <section id="psicologia" class="py-32 px-6">
+            <div class="max-w-6xl mx-auto glass-card text-center border-t-2 border-blue-500/20">
+                <div class="mb-16">
+                    <h2 class="text-5xl md:text-8xl font-black tracking-tighter mb-6 text-white">Mente en Red.</h2>
+                    <p class="text-gray-400 text-lg md:text-xl max-w-2xl mx-auto">El impacto no es solo social, es
+                        biológico. Analizamos cómo las redes reescriben tus circuitos neuronales.</p>
                 </div>
-                <div class="console-header">
-                    <div class="console-dot bg-red-500"></div>
-                    <div class="console-dot bg-yellow-500"></div>
-                    <div class="console-dot bg-green-500"></div>
-                    <span
-                        class="ml-4 text-[11px] text-zinc-500 tracking-[0.3em] font-bold uppercase">Simulation_v4.0_Running</span>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-16">
+                    <div class="psy-grid-item">
+                        <div class="w-10 h-10 bg-blue-500/20 rounded-lg flex items-center justify-center mb-6"><i
+                                data-lucide="eye" class="text-blue-500"></i></div>
+                        <h3 class="text-xl font-bold mb-3 text-white">Dismorfia Digital</h3>
+                        <p class="text-sm text-gray-500 leading-relaxed">Filtros que crean estándares inalcanzables,
+                            afectando la autoimagen real del usuario.</p>
+                    </div>
+                    <div class="psy-grid-item">
+                        <div class="w-10 h-10 bg-purple-500/20 rounded-lg flex items-center justify-center mb-6"><i
+                                data-lucide="zap" class="text-purple-500"></i></div>
+                        <h3 class="text-xl font-bold mb-3 text-white">Dopamina Hackeada</h3>
+                        <p class="text-sm text-gray-500 leading-relaxed">Micro-recompensas infinitas que generan
+                            dependencia al scroll y a la validación.</p>
+                    </div>
+                    <div class="psy-grid-item">
+                        <div class="w-10 h-10 bg-red-500/20 rounded-lg flex items-center justify-center mb-6"><i
+                                data-lucide="shield-alert" class="text-red-500"></i></div>
+                        <h3 class="text-xl font-bold mb-3 text-white">Aislamiento</h3>
+                        <p class="text-sm text-gray-500 leading-relaxed">Conexión superficial que debilita los vínculos
+                            físicos y la empatía real.</p>
+                    </div>
                 </div>
-                <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
-                    <div class="lg:col-span-7 text-left relative z-10">
-                        <h2 class="text-6xl md:text-8xl font-black text-white mb-10 tracking-tighter leading-[0.9]">
-                            Desafía al<br><span class="text-blue-500">Control.</span></h2>
-                        <p class="text-zinc-400 mb-14 text-xl md:text-2xl leading-relaxed font-medium max-w-2xl">¿Podrás
-                            escapar de las burbujas de filtro? Una experiencia interactiva para entender la economía de
-                            la atención.</p>
-                        <div class="flex flex-col sm:flex-row gap-6 items-start sm:items-center">
-                            <a href="/html/juego.html" class="btn-simulation-premium">
-                                Iniciar Simulación
-                                <div class="btn-icon-box"><i data-lucide="terminal" class="w-4 h-4"></i></div>
-                            </a>
-                            <div class="neural-badge">
-                                <div class="w-2.5 h-2.5 bg-blue-500 rounded-full animate-ping"></div>
-                                <span class="text-zinc-400 text-[10px] font-black uppercase tracking-[0.2em]">Neural
-                                    Link Engaged</span>
+                <a href="/html/consecuencias.html"
+                    class="inline-block border border-zinc-800 hover:border-white px-8 py-3 rounded-full transition-all text-sm font-bold uppercase tracking-widest text-white">Explorar
+                    Análisis Completo</a>
+            </div>
+        </section>
+
+        <!-- VIDEOJUEGO -->
+        <section id="videojuego" class="py-24 px-6">
+            <div class="max-w-7xl mx-auto">
+                <div class="console-ui">
+                    <div
+                        class="absolute -top-24 -right-24 w-96 h-96 bg-blue-600/10 blur-[120px] rounded-full pointer-events-none">
+                    </div>
+                    <div class="console-header">
+                        <div class="console-dot bg-red-500"></div>
+                        <div class="console-dot bg-yellow-500"></div>
+                        <div class="console-dot bg-green-500"></div>
+                        <span
+                            class="ml-4 text-[11px] text-zinc-500 tracking-[0.3em] font-bold uppercase">Simulation_v4.0_Running</span>
+                    </div>
+                    <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+                        <div class="lg:col-span-7 text-left relative z-10">
+                            <h2 class="text-6xl md:text-8xl font-black text-white mb-10 tracking-tighter leading-[0.9]">
+                                Desafía al<br><span class="text-blue-500">Control.</span></h2>
+                            <p class="text-zinc-400 mb-14 text-xl md:text-2xl leading-relaxed font-medium max-w-2xl">
+                                ¿Podrás escapar de las burbujas de filtro? Una experiencia interactiva para entender la
+                                economía de la atención.</p>
+                            <div class="flex flex-col sm:flex-row gap-6 items-start sm:items-center">
+                                <a href="/html/juego.html" class="btn-simulation-premium">
+                                    Iniciar Simulación
+                                    <div class="btn-icon-box"><i data-lucide="terminal" class="w-4 h-4"></i></div>
+                                </a>
+                                <div class="neural-badge">
+                                    <div class="w-2.5 h-2.5 bg-blue-500 rounded-full animate-ping"></div>
+                                    <span class="text-zinc-400 text-[10px] font-black uppercase tracking-[0.2em]">Neural
+                                        Link Engaged</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="lg:col-span-5 relative flex justify-center items-center h-[500px]">
+                            <div class="brain-container">
+                                <div class="orbit orbit-1">
+                                    <div class="spark"></div>
+                                </div>
+                                <div class="orbit orbit-2">
+                                    <div class="spark" style="bottom:-4px;top:auto;"></div>
+                                </div>
+                                <div class="orbit orbit-3">
+                                    <div class="spark" style="right:-4px;top:50%;"></div>
+                                </div>
+                                <svg class="brain-svg" viewBox="0 0 24 24">
+                                    <path
+                                        d="M9.5 2A2.5 2.5 0 0 1 12 4.5v15a2.5 2.5 0 0 1-4.96.44 2.5 2.5 0 0 1-2.96-3.08 3 3 0 0 1-.34-5.58 2.5 2.5 0 0 1 1.32-4.24 2.5 2.5 0 0 1 4.44-2.04zm5 0a2.5 2.5 0 0 0-2.5 2.5v15a2.5 2.5 0 0 0 4.96.44 2.5 2.5 0 0 0 2.96-3.08 3 3 0 0 0 .34-5.58 2.5 2.5 0 0 0-1.32-4.24 2.5 2.5 0 0 0-4.44-2.04z" />
+                                    <path d="M12 4.5V19.5" stroke-dasharray="2 2" opacity="0.5" />
+                                </svg>
                             </div>
                         </div>
                     </div>
-                    <div class="lg:col-span-5 relative flex justify-center items-center h-[500px]">
-                        <div class="brain-container">
-                            <div class="orbit orbit-1">
-                                <div class="spark"></div>
-                            </div>
-                            <div class="orbit orbit-2">
-                                <div class="spark" style="bottom: -4px; top: auto;"></div>
-                            </div>
-                            <div class="orbit orbit-3">
-                                <div class="spark" style="right: -4px; top: 50%;"></div>
-                            </div>
-                            <svg class="brain-svg" viewBox="0 0 24 24">
-                                <path
-                                    d="M9.5 2A2.5 2.5 0 0 1 12 4.5v15a2.5 2.5 0 0 1-4.96.44 2.5 2.5 0 0 1-2.96-3.08 3 3 0 0 1-.34-5.58 2.5 2.5 0 0 1 1.32-4.24 2.5 2.5 0 0 1 4.44-2.04zm5 0a2.5 2.5 0 0 0-2.5 2.5v15a2.5 2.5 0 0 0 4.96.44 2.5 2.5 0 0 0 2.96-3.08 3 3 0 0 0 .34-5.58 2.5 2.5 0 0 0-1.32-4.24 2.5 2.5 0 0 0-4.44-2.04z" />
-                                <path d="M12 4.5V19.5" stroke-dasharray="2 2" opacity="0.5" />
-                            </svg>
-                        </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- CHECKPOINT -->
+        <section id="final" class="py-40 px-6">
+            <div class="checkpoint-container">
+                <div class="scan-beam" id="scanBeam"></div>
+                <div class="relative z-10">
+                    <div
+                        class="w-24 h-24 bg-[#111] border border-white/10 rounded-3xl flex items-center justify-center mx-auto mb-10 shadow-2xl">
+                        <i data-lucide="clipboard-check" class="w-10 h-10 text-blue-500"></i>
                     </div>
+                    <h2 class="text-5xl md:text-8xl font-black tracking-tighter text-white mb-6">Evaluación Final.</h2>
+                    <p class="text-zinc-400 text-lg md:text-2xl max-w-2xl mx-auto font-medium leading-relaxed mb-10">Has
+                        recorrido la historia y el impacto de las redes sociales. ¿Qué tan profunda es tu comprensión
+                        sobre el entorno digital?</p>
+                    <a href="/html/quizz.html" class="btn-checkpoint">Iniciar Quizz <i data-lucide="play"
+                            class="w-5 h-5"></i></a>
                 </div>
             </div>
-        </div>
-    </section>
+        </section>
 
-    <!-- CHECKPOINT (QUIZZ) -->
-    <section id="final" class="py-40 px-6">
-        <div class="checkpoint-container">
-            <div class="scan-beam" id="scanBeam"></div>
-            <div class="relative z-10">
-                <div
-                    class="w-24 h-24 bg-[#111] border border-white/10 rounded-3xl flex items-center justify-center mx-auto mb-10 shadow-2xl">
-                    <i data-lucide="clipboard-check" class="w-10 h-10 text-blue-500"></i>
+        <!-- REFERENCIAS -->
+        <section class="py-20 border-t border-white/5 bg-black/50 backdrop-blur-sm">
+            <div class="max-w-7xl mx-auto px-8 flex flex-col md:flex-row justify-between items-center gap-8">
+                <div class="text-left">
+                    <h4 class="text-zinc-400 font-bold text-xs uppercase tracking-[0.3em] mb-3">Fuentes & Bibliografía
+                    </h4>
+                    <p class="text-zinc-600 text-xs max-w-md leading-relaxed">Referencias o de donde sacamos toda la
+                        info para construir este proyecto de análisis e investigación digital.</p>
                 </div>
-                <h2 class="text-5xl md:text-8xl font-black tracking-tighter text-white mb-6">Evaluación Final.</h2>
-                <p class="text-zinc-400 text-lg md:text-2xl max-w-2xl mx-auto font-medium leading-relaxed mb-10">Has
-                    recorrido la historia y el impacto de las redes sociales. ¿Qué tan profunda es tu comprensión sobre
-                    el entorno digital?</p>
-                <a href="/html/quizz.html" class="btn-checkpoint">Iniciar Quizz <i data-lucide="play"
-                        class="w-5 h-5"></i></a>
+                <a href="/html/ref.html"
+                    class="flex items-center gap-4 px-8 py-4 bg-zinc-900 border border-white/10 rounded-xl text-zinc-300 font-bold text-[10px] uppercase tracking-widest hover:bg-zinc-800 hover:border-blue-500/50 transition-all duration-300">
+                    Ver Referencias <i data-lucide="external-link" class="w-4 h-4 text-blue-500"></i>
+                </a>
             </div>
-        </div>
-    </section>
+        </section>
 
-    <!-- REFERENCIAS -->
-    <section class="py-20 border-t border-white/5 bg-black/50 backdrop-blur-sm">
-        <div class="max-w-7xl mx-auto px-8 flex flex-col md:flex-row justify-between items-center gap-8">
-            <div class="text-left">
-                <h4 class="text-zinc-400 font-bold text-xs uppercase tracking-[0.3em] mb-3">Fuentes & Bibliografía</h4>
-                <p class="text-zinc-600 text-xs max-w-md leading-relaxed">
-                    Referencias o de donde sacamos toda la info para construir este proyecto de análisis e investigación
-                    digital.
-                </p>
+        <!-- INFO REDES -->
+        <section class="py-20 border-t border-white/5 bg-black/50 backdrop-blur-sm">
+            <div class="max-w-7xl mx-auto px-8 flex flex-col md:flex-row justify-between items-center gap-8">
+                <div class="text-left">
+                    <h4 class="text-zinc-400 font-bold text-xs uppercase tracking-[0.3em] mb-3">Info Redes Sociales</h4>
+                    <p class="text-zinc-600 text-xs max-w-md leading-relaxed">De donde sacamos la info de las redes
+                        sociales.</p>
+                </div>
+                <a href="/html/info-redes.html"
+                    class="flex items-center gap-4 px-8 py-4 bg-zinc-900 border border-white/10 rounded-xl text-zinc-300 font-bold text-[10px] uppercase tracking-widest hover:bg-zinc-800 hover:border-blue-500/50 transition-all duration-300">
+                    Ver Info Redes Sociales <i data-lucide="external-link" class="w-4 h-4 text-blue-500"></i>
+                </a>
             </div>
-            <a href="/html/ref.html"
-                class="flex items-center gap-4 px-8 py-4 bg-zinc-900 border border-white/10 rounded-xl text-zinc-300 font-bold text-[10px] uppercase tracking-widest hover:bg-zinc-800 hover:border-blue-500/50 transition-all duration-300">
-                Ver Referencias <i data-lucide="external-link" class="w-4 h-4 text-blue-500"></i>
-            </a>
-        </div>
-    </section>
+        </section>
 
-    <footer class="py-20 text-center border-t border-zinc-900">
-        <p class="text-zinc-600 text-[10px] font-bold uppercase tracking-[0.3em]">María José Yosa Amézquita - 2026 |
-            Grado 10-04</p>
-    </footer>
+        <footer class="py-20 text-center border-t border-zinc-900">
+            <p class="text-zinc-600 text-[10px] font-bold uppercase tracking-[0.3em]">María José Yosa Amézquita - 2026 |
+                Grado 10-04</p>
+        </footer>
+
+    </div><!-- /page-content -->
 
     <script src="/js/script.js"></script>
 </body>

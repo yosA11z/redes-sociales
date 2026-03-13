@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fuentes</title>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=Outfit:wght@200;300;400&display=swap"
+        rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+    <link rel="stylesheet" href="/styles/info-redes.css">
+</head>
+
+<body>
+
+    <canvas id="c"></canvas>
+
+    <nav>
+        <span class="nav-l">Bibliografía — Redes Sociales</span>
+    </nav>
+
+    <div id="hint">
+        <h1>De dónde<br>sacamos<br>la <em>info.</em></h1>
+    </div>
+
+    <div id="tooltip">
+        <div id="tooltip-name"></div>
+        <div id="tooltip-year"></div>
+        <div id="tooltip-src-label">Fuente</div>
+        <div id="tooltip-src">
+            <svg viewBox="0 0 11 11" fill="none">
+                <path d="M1.5 5.5h8M5.5 1.5l4 4-4 4" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"
+                    stroke-linejoin="round" />
+            </svg>
+            <span id="tooltip-src-text"></span>
+        </div>
+    </div>
+
+    <div id="instruction">Clic para abrir</div>
+
+    <script src="/js/info-redes.js"></script>
+</body>
+
+</html>
