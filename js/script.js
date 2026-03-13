@@ -1,3 +1,4 @@
+let pageInitialized = false;
 gsap.registerPlugin(ScrollTrigger);
 
 /* =============================================
@@ -103,6 +104,9 @@ gsap.registerPlugin(ScrollTrigger);
    PAGE INIT (runs AFTER loader)
 ============================================= */
 function initPage() {
+    if (pageInitialized) return;  // si ya se ejecutó, no hace nada
+    pageInitialized = true;
+
     lucide.createIcons();
 
     const data = [
@@ -139,15 +143,13 @@ function initPage() {
         container.appendChild(div);
     });
 
-    /* Nav hero entrance */
+    // animaciones y scroll triggers
     gsap.timeline()
         .fromTo("#mainNav", { y: -100, opacity: 0 }, { y: 0, opacity: 1, duration: 1.2, ease: "expo.out" })
         .to("#heroTitle", { opacity: 1, y: 0, duration: 1.5, ease: "power4.out" }, "-=0.8")
         .to("#heroSub", { opacity: 1, y: 0, duration: 1.5, ease: "power3.out" }, "-=1.2");
 
     setupScrollTriggers();
-
-    gsap.fromTo("#scanBeam", { top: "-120px" }, { top: "100%", duration: 4, repeat: -1, ease: "power1.inOut" });
 }
 
 function setupScrollTriggers() {
