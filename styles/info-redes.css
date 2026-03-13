@@ -244,3 +244,7 @@
             opacity: 0;
             white-space: nowrap;
         }
+
+        html {
+            scroll-behavior: smooth;
+        }

@@ -686,3 +686,7 @@
             width: 18px;
             height: 18px;
         }
+
+        html {
+            scroll-behavior: smooth;
+        }

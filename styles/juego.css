@@ -715,3 +715,7 @@
         .coda-sub.appear {
             opacity: 1;
         }
+
+        html {
+            scroll-behavior: smooth;
+        }
