@@ -1,0 +1,935 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Referencias — Impacto Digital</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --apple-bg: #000000;
+            --apple-text: #f5f5f7;
+            --apple-sub: #86868b;
+            --apple-blue: #0a84ff;
+            --glass-border: rgba(255, 255, 255, 0.1);
+        }
+
+        *,
+        *::before,
+        *::after {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, sans-serif;
+            background-color: var(--apple-bg);
+            color: var(--apple-text);
+            overflow-x: hidden;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        /* ── BACK BTN ── */
+        .back-btn {
+            position: fixed;
+            top: 24px;
+            left: 32px;
+            z-index: 200;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 11px;
+            font-weight: 700;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            color: var(--apple-sub);
+            text-decoration: none;
+            padding: 10px 22px;
+            background: rgba(20, 20, 20, 0.8);
+            backdrop-filter: blur(30px);
+            border: 1px solid var(--glass-border);
+            border-radius: 100px;
+            transition: all 0.3s ease;
+        }
+
+        .back-btn:hover {
+            color: #fff;
+            border-color: rgba(255, 255, 255, 0.3);
+            background: rgba(30, 30, 30, 0.9);
+        }
+
+        /* ── HERO ── */
+        .hero {
+            position: relative;
+            min-height: 60vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+            padding: 0 64px 80px;
+            background: #000;
+            overflow: hidden;
+        }
+
+        .hero-mesh {
+            position: absolute;
+            inset: 0;
+            background:
+                radial-gradient(circle at 50% -10%, #005E98 0%, transparent 55%),
+                radial-gradient(circle at 0% 100%, #011E6A 0%, transparent 45%),
+                radial-gradient(circle at 100% 80%, #1a3a5c 0%, transparent 50%);
+            opacity: 0.5;
+            filter: blur(80px);
+            z-index: 0;
+        }
+
+        .hero-label {
+            font-size: 10px;
+            font-weight: 700;
+            letter-spacing: 0.3em;
+            text-transform: uppercase;
+            color: var(--apple-sub);
+            margin-bottom: 20px;
+            position: relative;
+            z-index: 2;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .hero-label::before {
+            content: '';
+            width: 32px;
+            height: 1px;
+            background: var(--apple-sub);
+            display: block;
+        }
+
+        .hero-title {
+            font-size: clamp(60px, 10vw, 130px);
+            font-weight: 800;
+            letter-spacing: -0.05em;
+            line-height: 0.9;
+            color: #fff;
+            position: relative;
+            z-index: 2;
+            opacity: 0;
+            transform: translateY(40px);
+        }
+
+        .hero-sub {
+            font-size: clamp(15px, 1.5vw, 18px);
+            font-weight: 400;
+            color: var(--apple-sub);
+            max-width: 520px;
+            line-height: 1.7;
+            margin-top: 28px;
+            position: relative;
+            z-index: 2;
+            opacity: 0;
+        }
+
+        .hero-badges {
+            display: flex;
+            gap: 10px;
+            margin-top: 32px;
+            position: relative;
+            z-index: 2;
+            opacity: 0;
+        }
+
+        .badge {
+            padding: 6px 16px;
+            border: 1px solid var(--glass-border);
+            border-radius: 100px;
+            font-size: 10px;
+            font-weight: 700;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            color: var(--apple-sub);
+            background: rgba(255, 255, 255, 0.03);
+        }
+
+        .badge.blue {
+            border-color: rgba(10, 132, 255, 0.4);
+            color: var(--apple-blue);
+        }
+
+        /* ── SECTION ── */
+        .ref-section {
+            padding: 80px 64px;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .section-label {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            font-size: 10px;
+            font-weight: 700;
+            letter-spacing: 0.3em;
+            text-transform: uppercase;
+            color: var(--apple-sub);
+            margin-bottom: 40px;
+        }
+
+        .section-label span.line {
+            flex: 1;
+            height: 1px;
+            background: var(--glass-border);
+        }
+
+        .section-label .num {
+            color: var(--apple-blue);
+        }
+
+        /* ── TECH GRID ── */
+        .tech-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 16px;
+            margin-bottom: 0;
+        }
+
+        .tech-card {
+            position: relative;
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.04) 0%, rgba(255, 255, 255, 0.01) 100%);
+            border: 1px solid var(--glass-border);
+            border-radius: 24px;
+            padding: 28px;
+            text-decoration: none;
+            color: inherit;
+            transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+            opacity: 0;
+            transform: translateY(20px);
+        }
+
+        .tech-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, var(--card-color, var(--apple-blue)), transparent);
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+
+        .tech-card:hover {
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.07) 0%, rgba(255, 255, 255, 0.02) 100%);
+            border-color: rgba(255, 255, 255, 0.18);
+            transform: translateY(-6px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5);
+        }
+
+        .tech-card:hover::before {
+            opacity: 1;
+        }
+
+        .card-icon-box {
+            width: 40px;
+            height: 40px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 1px solid var(--glass-border);
+            transition: all 0.3s ease;
+            flex-shrink: 0;
+        }
+
+        .tech-card:hover .card-icon-box {
+            background: rgba(10, 132, 255, 0.15);
+            border-color: rgba(10, 132, 255, 0.4);
+        }
+
+        .card-cat {
+            font-size: 9px;
+            font-weight: 800;
+            letter-spacing: 0.25em;
+            text-transform: uppercase;
+            color: var(--apple-blue);
+            margin-bottom: 4px;
+            display: block;
+        }
+
+        .card-title {
+            font-size: 16px;
+            font-weight: 700;
+            line-height: 1.3;
+            color: #fff;
+            letter-spacing: -0.02em;
+        }
+
+        .card-desc {
+            font-size: 12px;
+            line-height: 1.6;
+            color: var(--apple-sub);
+            font-weight: 400;
+        }
+
+        .card-footer {
+            margin-top: auto;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding-top: 16px;
+            border-top: 1px solid var(--glass-border);
+        }
+
+        .card-link-label {
+            font-size: 9px;
+            font-weight: 700;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            color: var(--apple-sub);
+            transition: color 0.2s;
+        }
+
+        .tech-card:hover .card-link-label {
+            color: var(--apple-blue);
+        }
+
+        .card-arrow {
+            width: 28px;
+            height: 28px;
+            border-radius: 8px;
+            background: rgba(255, 255, 255, 0.04);
+            border: 1px solid var(--glass-border);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--apple-sub);
+            transition: all 0.3s;
+        }
+
+        .tech-card:hover .card-arrow {
+            background: var(--apple-blue);
+            border-color: var(--apple-blue);
+            color: #fff;
+        }
+
+        /* ── INFO GRID (sources) ── */
+        .info-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 16px;
+        }
+
+        .info-card {
+            position: relative;
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid var(--glass-border);
+            border-radius: 24px;
+            padding: 32px;
+            text-decoration: none;
+            color: inherit;
+            transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            opacity: 0;
+            transform: translateY(20px);
+            overflow: hidden;
+        }
+
+        .info-card::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, var(--card-color, var(--apple-blue)), transparent);
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+
+        .info-card:hover {
+            background: rgba(255, 255, 255, 0.04);
+            border-color: rgba(255, 255, 255, 0.15);
+            transform: translateY(-5px);
+            box-shadow: 0 16px 32px rgba(0, 0, 0, 0.4);
+        }
+
+        .info-card:hover::after {
+            opacity: 1;
+        }
+
+        .info-header {
+            display: flex;
+            align-items: flex-start;
+            justify-content: space-between;
+            gap: 12px;
+        }
+
+        .info-icon {
+            width: 36px;
+            height: 36px;
+            border-radius: 10px;
+            background: rgba(255, 255, 255, 0.04);
+            border: 1px solid var(--glass-border);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--apple-blue);
+            flex-shrink: 0;
+            transition: all 0.3s;
+        }
+
+        .info-card:hover .info-icon {
+            background: rgba(10, 132, 255, 0.12);
+            border-color: rgba(10, 132, 255, 0.4);
+        }
+
+        .info-type {
+            font-size: 9px;
+            font-weight: 800;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            padding: 4px 10px;
+            border-radius: 100px;
+            border: 1px solid var(--glass-border);
+            color: var(--apple-sub);
+            flex-shrink: 0;
+        }
+
+        .info-title {
+            font-size: 15px;
+            font-weight: 700;
+            line-height: 1.35;
+            color: #fff;
+            letter-spacing: -0.01em;
+        }
+
+        .info-desc {
+            font-size: 12px;
+            line-height: 1.65;
+            color: var(--apple-sub);
+            font-weight: 400;
+        }
+
+        .info-source {
+            font-size: 10px;
+            font-weight: 600;
+            color: rgba(255, 255, 255, 0.25);
+            letter-spacing: 0.05em;
+            margin-top: 4px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .info-source::before {
+            content: '↗';
+            font-size: 10px;
+        }
+
+        /* ── STATS BAR ── */
+        .stats-bar {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            border: 1px solid var(--glass-border);
+            border-radius: 24px;
+            background: rgba(255, 255, 255, 0.02);
+            margin: 0 64px 80px;
+            overflow: hidden;
+            opacity: 0;
+        }
+
+        .stat-item {
+            padding: 40px 48px;
+            border-right: 1px solid var(--glass-border);
+        }
+
+        .stat-item:last-child {
+            border-right: none;
+        }
+
+        .stat-num {
+            font-size: clamp(36px, 5vw, 60px);
+            font-weight: 800;
+            letter-spacing: -0.04em;
+            color: #fff;
+            line-height: 1;
+            margin-bottom: 8px;
+        }
+
+        .stat-num span {
+            color: var(--apple-blue);
+        }
+
+        .stat-label {
+            font-size: 11px;
+            font-weight: 600;
+            color: var(--apple-sub);
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+        }
+
+        /* ── DIVIDER ── */
+        .section-divider {
+            height: 1px;
+            background: var(--glass-border);
+            margin: 0 64px 80px;
+        }
+
+        /* ── FOOTER ── */
+        footer {
+            padding: 40px 64px;
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: rgba(0, 0, 0, 0.5);
+        }
+
+        .footer-brand {
+            font-size: 10px;
+            font-weight: 700;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            color: rgba(255, 255, 255, 0.2);
+        }
+
+        .footer-copy {
+            font-size: 10px;
+            color: rgba(255, 255, 255, 0.15);
+            letter-spacing: 0.05em;
+        }
+
+        @media(max-width:1024px) {
+            .tech-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .info-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .hero,
+            .ref-section {
+                padding-left: 32px;
+                padding-right: 32px;
+            }
+
+            .stats-bar {
+                margin: 0 32px 60px;
+            }
+
+            .section-divider {
+                margin: 0 32px 60px;
+            }
+
+            footer {
+                padding: 32px;
+            }
+        }
+
+        @media(max-width:640px) {
+
+            .tech-grid,
+            .info-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .stats-bar {
+                grid-template-columns: 1fr;
+            }
+
+            .stat-item {
+                border-right: none;
+                border-bottom: 1px solid var(--glass-border);
+            }
+
+            .hero {
+                padding: 0 20px 60px;
+            }
+
+            .ref-section {
+                padding: 60px 20px;
+            }
+
+            .stats-bar {
+                margin: 0 20px 60px;
+            }
+
+            .section-divider {
+                margin: 0 20px 60px;
+            }
+
+            footer {
+                padding: 24px 20px;
+                flex-direction: column;
+                gap: 12px;
+                text-align: center;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- BACK -->
+    <a href="redes_sociales_timeline.html" class="back-btn">
+        <i data-lucide="chevron-left" style="width:14px;height:14px"></i>
+        Volver
+    </a>
+
+    <!-- HERO -->
+    <header class="hero">
+        <div class="hero-mesh"></div>
+        <p class="hero-label">Impacto Digital — Bibliografía</p>
+        <h1 class="hero-title" id="heroTitle">Referencias.</h1>
+        <p class="hero-sub" id="heroSub">Todo el sustento académico, científico y tecnológico detrás de este proyecto de
+            investigación digital.</p>
+        <div class="hero-badges" id="heroBadges">
+            <span class="badge">+18 fuentes</span>
+            <span class="badge">Ciencia revisada por pares</span>
+            <span class="badge blue">Stack 2026</span>
+        </div>
+    </header>
+
+    <!-- STATS -->
+    <div class="stats-bar" id="statsBar">
+        <div class="stat-item">
+            <div class="stat-num"><span id="c1">0</span></div>
+            <div class="stat-label">Fuentes de información</div>
+        </div>
+        <div class="stat-item">
+            <div class="stat-num"><span id="c2">0</span></div>
+            <div class="stat-label">Tecnologías usadas</div>
+        </div>
+        <div class="stat-item">
+            <div class="stat-num"><span id="c3">0</span></div>
+            <div class="stat-label">Categorías temáticas</div>
+        </div>
+    </div>
+
+    <!-- TECNOLOGÍAS -->
+    <section class="ref-section" id="techSection">
+        <div class="section-label">
+            <span class="num">01</span>
+            Tecnologías usadas
+            <span class="line"></span>
+        </div>
+        <div class="tech-grid" id="techGrid"></div>
+    </section>
+
+    <div class="section-divider"></div>
+
+    <!-- FUENTES DE INFORMACIÓN -->
+    <section class="ref-section" id="infoSection">
+        <div class="section-label">
+            <span class="num">02</span>
+            Fuentes de información
+            <span class="line"></span>
+        </div>
+        <div class="info-grid" id="infoGrid"></div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer>
+        <span class="footer-brand">Impacto Digital — 2026</span>
+        <span class="footer-copy">María José Yosa Amézquita · Grado 10-04</span>
+    </footer>
+
+    <script>
+        gsap.registerPlugin(ScrollTrigger);
+
+        // ── DATA ──
+        const tech = [
+            {
+                title: "GSAP 3",
+                cat: "Animación",
+                desc: "Motor de animación JavaScript de alto rendimiento. Usado para todas las transiciones, scroll triggers y efectos de entrada del proyecto.",
+                url: "https://gsap.com/",
+                icon: "zap",
+                color: "#10b981"
+            },
+            {
+                title: "Tailwind CSS",
+                cat: "Estilos",
+                desc: "Framework CSS utilitario para construir interfaces modernas y responsivas sin salir del HTML.",
+                url: "https://tailwindcss.com/",
+                icon: "code-2",
+                color: "#06b6d4"
+            },
+            {
+                title: "Lucide Icons",
+                cat: "Iconografía",
+                desc: "Librería de íconos SVG limpios y consistentes, usados en toda la navegación e interfaz del proyecto.",
+                url: "https://lucide.dev/",
+                icon: "layout-grid",
+                color: "#f97316"
+            },
+            {
+                title: "Unsplash",
+                cat: "Recursos visuales",
+                desc: "Imágenes de alta resolución libres de derechos utilizadas como fondos visuales en la página de referencias.",
+                url: "https://unsplash.com/",
+                icon: "image",
+                color: "#e11d48"
+            },
+            {
+                title: "Google Fonts",
+                cat: "Tipografía",
+                desc: "Fuente Inter de Google Fonts, usada en toda la interfaz por su legibilidad y carácter moderno.",
+                url: "https://fonts.google.com/specimen/Inter",
+                icon: "type",
+                color: "#8b5cf6"
+            },
+            {
+                title: "ScrollTrigger",
+                cat: "Scroll UX",
+                desc: "Plugin oficial de GSAP para animar elementos en función del scroll del usuario. Base de la experiencia de la cronología.",
+                url: "https://gsap.com/docs/v3/Plugins/ScrollTrigger/",
+                icon: "mouse-pointer-2",
+                color: "#0a84ff"
+            },
+            {
+                title: "Wikipedia / Wikimedia",
+                cat: "Assets",
+                desc: "Fuente de logos e imágenes de las redes sociales usados en la línea de tiempo del proyecto.",
+                url: "https://commons.wikimedia.org/",
+                icon: "globe",
+                color: "#84cc16"
+            },
+            {
+                title: "HTML5 / CSS3 / JS",
+                cat: "Core",
+                desc: "Tecnologías base del proyecto. Estructura, estilos y lógica implementados sin frameworks adicionales de JavaScript.",
+                url: "https://developer.mozilla.org/",
+                icon: "terminal",
+                color: "#ffc800"
+            }
+        ];
+
+        const info = [
+            {
+                title: "Social Media Addiction — Harvard McLean",
+                type: "Psicología",
+                desc: "Análisis clínico sobre los mecanismos de recompensa cerebral en entornos digitales. Base del análisis de dopamina hackeada del proyecto.",
+                source: "mcleanhospital.org",
+                url: "https://www.mcleanhospital.org/essential/it-isnt-just-you-social-media-addictive",
+                icon: "brain",
+                color: "#ef4444"
+            },
+            {
+                title: "The Social Dilemma — Center for Humane Technology",
+                type: "Ética digital",
+                desc: "Exploración de los algoritmos persuasivos y el diseño manipulador de las plataformas. Referencia del simulador de control.",
+                source: "humanetech.com",
+                url: "https://www.humanetech.com/the-social-dilemma",
+                icon: "alert-triangle",
+                color: "#f59e0b"
+            },
+            {
+                title: "Digital 2024 — DataReportal Global Report",
+                type: "Métricas globales",
+                desc: "Reporte anual de uso digital mundial con estadísticas de usuarios activos, tiempo de pantalla y distribución por plataforma.",
+                source: "datareportal.com",
+                url: "https://datareportal.com/reports/digital-2024-global-overview-report",
+                icon: "bar-chart-3",
+                color: "#0a84ff"
+            },
+            {
+                title: "Neural Plasticity Study — Oxford Academic",
+                type: "Neurociencia",
+                desc: "Estudio revisado por pares sobre cómo el uso sostenido de redes sociales altera la estructura cognitiva y los circuitos neuronales.",
+                source: "academic.oup.com",
+                url: "https://academic.oup.com/scan/article/11/10/1566/2333796",
+                icon: "activity",
+                color: "#8b5cf6"
+            },
+            {
+                title: "Impacto en Salud Mental de Adolescentes — University of Utah Health",
+                type: "Salud mental",
+                desc: "Los adultos jóvenes que usan redes sociales tienen tres veces más probabilidades de sufrir depresión, según esta investigación clínica.",
+                source: "healthcare.utah.edu",
+                url: "https://healthcare.utah.edu/healthfeed/2023/01/el-impacto-de-las-redes-sociales-en-la-salud-mental-de-los-adolescentes",
+                icon: "heart-pulse",
+                color: "#ef4444"
+            },
+            {
+                title: "Redes Sociales y Salud Mental Universitaria — Dialnet",
+                type: "Revisión sistemática",
+                desc: "Revisión PRISMA de 13 estudios: el alto uso de redes correlaciona con depresión, ansiedad, FOMO y trastornos del sueño en universitarios.",
+                source: "dialnet.unirioja.es",
+                url: "https://dialnet.unirioja.es/servlet/articulo?codigo=8239570",
+                icon: "book-open",
+                color: "#10b981"
+            },
+            {
+                title: "Policy Brief: Redes y Salud Mental en Jóvenes — ONTSI",
+                type: "Políticas públicas",
+                desc: "Informe elaborado por el Observatorio Nacional de Tecnología sobre el impacto del uso de internet en la salud mental de jóvenes y adolescentes.",
+                source: "ontsi.es",
+                url: "https://www.ontsi.es/sites/ontsi/files/2023-10/policybriefredesocialesaludmentaljovenesyadolescentes.pdf",
+                icon: "file-text",
+                color: "#06b6d4"
+            },
+            {
+                title: "Adicción a Redes y Salud Mental — Revista Vive",
+                type: "Bibliometría",
+                desc: "Análisis bibliométrico de 277 estudios en Scopus (2014–2024). La producción científica se disparó desde 2020 con pico en 2022.",
+                source: "revistavive.org",
+                url: "https://revistavive.org/index.php/revistavive/article/view/566",
+                icon: "trending-up",
+                color: "#f97316"
+            },
+            {
+                title: "Impacto en Estudiantes de Medicina — SciELO Perú",
+                type: "Estudio cuantitativo",
+                desc: "Estudio con 454 estudiantes de medicina: la adicción a redes sociales se asocia significativamente con depresión, ansiedad y mala calidad de sueño.",
+                source: "scielo.org.pe",
+                url: "http://www.scielo.org.pe/scielo.php?script=sci_arttext&pid=S2308-05312023000400062",
+                icon: "microscope",
+                color: "#84cc16"
+            },
+            {
+                title: "Uso Excesivo de Redes e Impacto Emocional — UANL",
+                type: "Estudio cuantitativo",
+                desc: "Aplicación de DASS-21 a 109 jóvenes: el uso excesivo de plataformas refuerza ciclos de dependencia y sobreestimulación emocional.",
+                source: "politicassociales.uanl.mx",
+                url: "https://politicassociales.uanl.mx/index.php/pss/article/view/184",
+                icon: "zap",
+                color: "#ffc800"
+            },
+            {
+                title: "History of Social Networking — Digital Trends",
+                type: "Historia",
+                desc: "Cronología detallada de la evolución de las redes sociales desde los 90s hasta hoy. Base de referencia de la línea de tiempo del proyecto.",
+                source: "digitaltrends.com",
+                url: "https://www.digitaltrends.com/features/the-history-of-social-networking/",
+                icon: "clock",
+                color: "#a78bfa"
+            },
+            {
+                title: "Cómo Afectan las Redes a los Jóvenes — Iberdrola",
+                type: "Divulgación",
+                desc: "Análisis divulgativo sobre el impacto psicológico y social del uso de redes sociales en menores y jóvenes adultos.",
+                source: "iberdrola.com",
+                url: "https://www.iberdrola.com/innovacion/impacto-redes-sociales-jovenes",
+                icon: "users",
+                color: "#e11d48"
+            }
+        ];
+
+        // ── RENDER TECH ──
+        function renderTech() {
+            const grid = document.getElementById('techGrid');
+            tech.forEach(t => {
+                const a = document.createElement('a');
+                a.href = t.url; a.target = '_blank';
+                a.className = 'tech-card';
+                a.style.setProperty('--card-color', t.color);
+                a.innerHTML = `
+      <div style="display:flex;align-items:center;gap:12px">
+        <div class="card-icon-box">
+          <i data-lucide="${t.icon}" style="width:18px;height:18px;color:${t.color}"></i>
+        </div>
+        <div>
+          <span class="card-cat">${t.cat}</span>
+          <h3 class="card-title">${t.title}</h3>
+        </div>
+      </div>
+      <p class="card-desc">${t.desc}</p>
+      <div class="card-footer">
+        <span class="card-link-label">Ver recurso</span>
+        <div class="card-arrow">
+          <i data-lucide="arrow-up-right" style="width:14px;height:14px"></i>
+        </div>
+      </div>
+    `;
+                grid.appendChild(a);
+            });
+        }
+
+        // ── RENDER INFO ──
+        function renderInfo() {
+            const grid = document.getElementById('infoGrid');
+            info.forEach(s => {
+                const a = document.createElement('a');
+                a.href = s.url; a.target = '_blank';
+                a.className = 'info-card';
+                a.style.setProperty('--card-color', s.color);
+                a.innerHTML = `
+      <div class="info-header">
+        <div class="info-icon">
+          <i data-lucide="${s.icon}" style="width:16px;height:16px"></i>
+        </div>
+        <span class="info-type">${s.type}</span>
+      </div>
+      <h3 class="info-title">${s.title}</h3>
+      <p class="info-desc">${s.desc}</p>
+      <div class="info-source">${s.source}</div>
+    `;
+                grid.appendChild(a);
+            });
+        }
+
+        // ── COUNTER ──
+        function counter(id, target, duration) {
+            const el = document.getElementById(id);
+            let start = 0;
+            const step = target / (duration / 16);
+            const timer = setInterval(() => {
+                start = Math.min(start + step, target);
+                el.textContent = Math.floor(start);
+                if (start >= target) clearInterval(timer);
+            }, 16);
+        }
+
+        // ── INIT ──
+        function init() {
+            renderTech();
+            renderInfo();
+            lucide.createIcons();
+
+            // hero
+            gsap.timeline()
+                .to('#heroTitle', { opacity: 1, y: 0, duration: 1.4, ease: 'power4.out', delay: 0.2 })
+                .to('#heroSub', { opacity: 1, y: 0, duration: 1, ease: 'power3.out' }, '-=1')
+                .to('#heroBadges', { opacity: 1, y: 0, duration: 0.8, ease: 'power3.out' }, '-=0.8');
+
+            // stats bar
+            ScrollTrigger.create({
+                trigger: '#statsBar', start: 'top 85%',
+                onEnter: () => {
+                    gsap.to('#statsBar', { opacity: 1, duration: 0.6, ease: 'power2.out' });
+                    counter('c1', 12, 1000);
+                    counter('c2', 8, 900);
+                    counter('c3', 6, 800);
+                }
+            });
+
+            // tech cards
+            ScrollTrigger.create({
+                trigger: '#techGrid', start: 'top 85%',
+                onEnter: () => gsap.to('.tech-card', { opacity: 1, y: 0, stagger: 0.07, duration: 0.7, ease: 'power3.out' })
+            });
+
+            // info cards
+            ScrollTrigger.create({
+                trigger: '#infoGrid', start: 'top 85%',
+                onEnter: () => gsap.to('.info-card', { opacity: 1, y: 0, stagger: 0.05, duration: 0.7, ease: 'power3.out' })
+            });
+        }
+
+        window.onload = init;
+    </script>
+</body>
+
+</html>

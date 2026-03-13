@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quizz</title>
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+    <link rel="stylesheet" href="/styles/quizz.css">
+</head>
+
+<body>
+
+    <!-- ===== SVG SPRITE ===== -->
+    <svg xmlns="http://www.w3.org/2000/svg" style="display:none">
+        <symbol id="ic-close" viewBox="0 0 24 24">
+            <line x1="5" y1="5" x2="19" y2="19" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" />
+            <line x1="19" y1="5" x2="5" y2="19" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" />
+        </symbol>
+        <symbol id="ic-heart" viewBox="0 0 24 24">
+            <path
+                d="M12 21C12 21 2.5 14 2.5 8C2.5 5.24 4.74 3 7.5 3C9.3 3 10.9 3.9 12 5.3C13.1 3.9 14.7 3 16.5 3C19.26 3 21.5 5.24 21.5 8C21.5 14 12 21 12 21Z"
+                fill="#ff4b4b" />
+        </symbol>
+        <symbol id="ic-heart-empty" viewBox="0 0 24 24">
+            <path
+                d="M12 21C12 21 2.5 14 2.5 8C2.5 5.24 4.74 3 7.5 3C9.3 3 10.9 3.9 12 5.3C13.1 3.9 14.7 3 16.5 3C19.26 3 21.5 5.24 21.5 8C21.5 14 12 21 12 21Z"
+                fill="none" stroke="#ddd" stroke-width="2" />
+        </symbol>
+        <symbol id="ic-check" viewBox="0 0 24 24">
+            <circle cx="12" cy="12" r="10" fill="currentColor" opacity=".15" />
+            <circle cx="12" cy="12" r="10" fill="none" stroke="currentColor" stroke-width="2" />
+            <polyline points="7,12.5 10.5,16.5 17,8.5" fill="none" stroke="currentColor" stroke-width="2.5"
+                stroke-linecap="round" stroke-linejoin="round" />
+        </symbol>
+        <symbol id="ic-xmark" viewBox="0 0 24 24">
+            <circle cx="12" cy="12" r="10" fill="currentColor" opacity=".15" />
+            <circle cx="12" cy="12" r="10" fill="none" stroke="currentColor" stroke-width="2" />
+            <line x1="8" y1="8" x2="16" y2="16" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" />
+            <line x1="16" y1="8" x2="8" y2="16" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" />
+        </symbol>
+        <symbol id="ic-bolt" viewBox="0 0 24 24">
+            <path d="M13 2L4 13.5H11L10 22L20 10.5H13.5L13 2Z" fill="#ffc800" stroke="#d4a100" stroke-width="1.2"
+                stroke-linejoin="round" />
+        </symbol>
+        <symbol id="ic-star" viewBox="0 0 24 24">
+            <path d="M12 2L15.1 8.3L22 9.3L17 14.1L18.2 21L12 17.8L5.8 21L7 14.1L2 9.3L8.9 8.3L12 2Z" fill="#1cb0f6"
+                stroke="#0e98d5" stroke-width="1.2" stroke-linejoin="round" />
+        </symbol>
+        <symbol id="ic-flame" viewBox="0 0 24 24">
+            <path
+                d="M12 2C12 2 14.5 6 14.5 9.5C14.5 9.5 16.5 8 16.5 5.5C16.5 5.5 20 8.5 20 13C20 17.42 16.42 21 12 21C7.58 21 4 17.42 4 13C4 8 8 5 8 5C8 7 9.5 9 10 9C10 6.5 12 2 12 2Z"
+                fill="#ff7b00" stroke="#cc5500" stroke-width="0.8" stroke-linejoin="round" />
+            <path d="M12 21C10.3 21 9 19.5 9 17.5C9 15.5 11 14 12 12C13 14 15 15.5 15 17.5C15 19.5 13.7 21 12 21Z"
+                fill="#ffc800" />
+        </symbol>
+        <symbol id="ic-share" viewBox="0 0 24 24">
+            <circle cx="18" cy="5" r="3" fill="none" stroke="currentColor" stroke-width="1.8" />
+            <circle cx="6" cy="12" r="3" fill="none" stroke="currentColor" stroke-width="1.8" />
+            <circle cx="18" cy="19" r="3" fill="none" stroke="currentColor" stroke-width="1.8" />
+            <line x1="8.6" y1="13.5" x2="15.4" y2="17.5" stroke="currentColor" stroke-width="1.8"
+                stroke-linecap="round" />
+            <line x1="15.4" y1="6.5" x2="8.6" y2="10.5" stroke="currentColor" stroke-width="1.8"
+                stroke-linecap="round" />
+        </symbol>
+        <!-- MASCOT: social network signal icon -->
+        <symbol id="ic-owl" viewBox="0 0 80 80">
+            <!-- outer glow ring -->
+            <circle cx="40" cy="40" r="36" fill="#edffd0" stroke="#58cc02" stroke-width="2.5" opacity=".5" />
+            <!-- center node -->
+            <circle cx="40" cy="40" r="10" fill="#58cc02" />
+            <circle cx="40" cy="40" r="5" fill="white" />
+            <!-- top node -->
+            <circle cx="40" cy="14" r="7" fill="#1cb0f6" />
+            <circle cx="40" cy="14" r="3.5" fill="white" />
+            <!-- bottom-left node -->
+            <circle cx="17" cy="57" r="7" fill="#ffc800" />
+            <circle cx="17" cy="57" r="3.5" fill="white" />
+            <!-- bottom-right node -->
+            <circle cx="63" cy="57" r="7" fill="#ff4b4b" />
+            <circle cx="63" cy="57" r="3.5" fill="white" />
+            <!-- connection lines -->
+            <line x1="40" y1="30" x2="40" y2="21" stroke="#1cb0f6" stroke-width="2.5" stroke-linecap="round" />
+            <line x1="31" y1="45" x2="22" y2="52" stroke="#ffc800" stroke-width="2.5" stroke-linecap="round" />
+            <line x1="49" y1="45" x2="58" y2="52" stroke="#ff4b4b" stroke-width="2.5" stroke-linecap="round" />
+            <!-- pulse ring on center -->
+            <circle cx="40" cy="40" r="16" fill="none" stroke="#58cc02" stroke-width="1.5" opacity=".35" />
+        </symbol>
+        <!-- TROPHY -->
+        <symbol id="ic-trophy" viewBox="0 0 64 64">
+            <rect x="22" y="52" width="20" height="5" rx="2" fill="#d4a100" />
+            <rect x="17" y="57" width="30" height="5" rx="2.5" fill="#ffc800" />
+            <path d="M15 8H49V33C49 43.5 41.3 52 32 52C22.7 52 15 43.5 15 33V8Z" fill="#ffc800" />
+            <path d="M15 8H49V16H15Z" fill="white" opacity=".2" />
+            <path d="M15 10C15 10 7 10 7 19C7 25 11.5 29 15 31" fill="none" stroke="#ffc800" stroke-width="4.5"
+                stroke-linecap="round" />
+            <path d="M49 10C49 10 57 10 57 19C57 25 52.5 29 49 31" fill="none" stroke="#ffc800" stroke-width="4.5"
+                stroke-linecap="round" />
+            <path d="M24 16C24 16 26 26 30 30" fill="none" stroke="white" stroke-width="2.5" stroke-linecap="round"
+                opacity=".45" />
+            <circle cx="41" cy="20" r="2" fill="white" opacity=".4" />
+        </symbol>
+        <!-- CELEBRATION BURST -->
+        <symbol id="ic-burst" viewBox="0 0 80 80">
+            <circle cx="40" cy="40" r="35" fill="#fff9e0" stroke="#ffc800" stroke-width="2" />
+            <circle cx="20" cy="22" r="4" fill="#ff4b4b" />
+            <circle cx="58" cy="18" r="3.5" fill="#1cb0f6" />
+            <circle cx="65" cy="47" r="4" fill="#58cc02" />
+            <circle cx="14" cy="54" r="3" fill="#ce82ff" />
+            <circle cx="42" cy="11" r="3" fill="#ffc800" />
+            <circle cx="60" cy="60" r="3" fill="#ff9500" />
+            <path d="M40 20L44 32H56L46.5 39L50 51L40 44L30 51L33.5 39L24 32H36Z" fill="#ffc800" stroke="#d4a100"
+                stroke-width="1" stroke-linejoin="round" />
+            <path d="M20 33L21.5 37.5H26.5L22.5 40.2L24 44.7L20 42L16 44.7L17.5 40.2L13.5 37.5H18.5Z" fill="#ffc800"
+                opacity=".65" transform="scale(0.85) translate(3 4)" />
+            <path d="M60 33L61.5 37.5H66.5L62.5 40.2L64 44.7L60 42L56 44.7L57.5 40.2L53.5 37.5H58.5Z" fill="#ffc800"
+                opacity=".65" transform="scale(0.85) translate(-7 4)" />
+        </symbol>
+    </svg>
+
+    <!-- PROGRESS BAR -->
+    <div class="progress-bar-wrap">
+        <button class="close-btn" title="Cerrar">
+            <svg width="18" height="18">
+                <use href="#ic-close" />
+            </svg>
+        </button>
+        <div class="progress-track">
+            <div class="progress-fill" id="progressFill"></div>
+        </div>
+        <div class="hearts" id="hearts">
+            <svg class="heart-svg" id="h1">
+                <use href="#ic-heart" />
+            </svg>
+            <svg class="heart-svg" id="h2">
+                <use href="#ic-heart" />
+            </svg>
+            <svg class="heart-svg" id="h3">
+                <use href="#ic-heart" />
+            </svg>
+        </div>
+    </div>
+
+    <div class="confetti-container" id="confetti"></div>
+
+    <!-- ===== SCREEN 1 ===== -->
+    <div class="screen active" id="screen1">
+        <p class="question-label">Pregunta 1 de 3</p>
+        <svg class="mascot-svg">
+            <use href="#ic-owl" />
+        </svg>
+        <p class="question-text">¿Cuál fue la primera red social del mundo?</p>
+        <div class="options-grid">
+            <button class="option-btn" data-q="1" data-correct="false"><span
+                    class="option-letter">A</span>Facebook</button>
+            <button class="option-btn" data-q="1" data-correct="true"><span class="option-letter">B</span>Six
+                Degrees</button>
+            <button class="option-btn" data-q="1" data-correct="false"><span
+                    class="option-letter">C</span>MySpace</button>
+            <button class="option-btn" data-q="1" data-correct="false"><span
+                    class="option-letter">D</span>Friendster</button>
+        </div>
+        <div class="feedback-banner" id="fb1">
+            <svg class="fb-icon" id="fbIcon1">
+                <use href="#ic-check" />
+            </svg>
+            <div class="feedback-text">
+                <span class="feedback-title" id="fbTitle1"></span>
+                <span class="feedback-sub" id="fbSub1"></span>
+            </div>
+        </div>
+        <button class="continue-btn green" id="cont1">Continuar</button>
+    </div>
+
+    <!-- ===== SCREEN 2 ===== -->
+    <div class="screen" id="screen2">
+        <p class="question-label">Pregunta 2 de 3</p>
+        <svg class="mascot-svg">
+            <use href="#ic-owl" />
+        </svg>
+        <p class="question-text">¿Cuál es la red social popular más reciente?</p>
+        <div class="options-grid">
+            <button class="option-btn" data-q="2" data-correct="false"><span
+                    class="option-letter">A</span>BeReal</button>
+            <button class="option-btn" data-q="2" data-correct="false"><span
+                    class="option-letter">B</span>Threads</button>
+            <button class="option-btn" data-q="2" data-correct="true"><span
+                    class="option-letter">C</span>TikTok</button>
+            <button class="option-btn" data-q="2" data-correct="false"><span
+                    class="option-letter">D</span>Mastodon</button>
+        </div>
+        <div class="feedback-banner" id="fb2">
+            <svg class="fb-icon" id="fbIcon2">
+                <use href="#ic-check" />
+            </svg>
+            <div class="feedback-text">
+                <span class="feedback-title" id="fbTitle2"></span>
+                <span class="feedback-sub" id="fbSub2"></span>
+            </div>
+        </div>
+        <button class="continue-btn green" id="cont2">Continuar</button>
+    </div>
+
+    <!-- ===== MIDPOINT ===== -->
+    <div class="screen" id="screenMid">
+        <div class="mid-screen">
+            <div class="mid-icon-anim">
+                <svg width="100" height="100">
+                    <use href="#ic-burst" />
+                </svg>
+            </div>
+            <div class="mid-badge">¡Increíble!</div>
+            <p class="mid-title">Lo estás haciendo<br>muy bien, crack</p>
+            <p class="mid-sub">Solo queda una pregunta. Demuestra que eres un experto en redes.</p>
+            <div class="mid-stats">
+                <div class="stat-box yellow">
+                    <svg class="stat-icon">
+                        <use href="#ic-bolt" />
+                    </svg>
+                    <div class="stat-num">×2</div>
+                    <div class="stat-label">Racha</div>
+                </div>
+                <div class="stat-box blue">
+                    <svg class="stat-icon">
+                        <use href="#ic-star" />
+                    </svg>
+                    <div class="stat-num">XP</div>
+                    <div class="stat-label">En forma</div>
+                </div>
+            </div>
+            <button class="mid-btn" id="midContinue">Seguir</button>
+        </div>
+    </div>
+
+    <!-- ===== SCREEN 3 ===== -->
+    <div class="screen" id="screen3">
+        <p class="question-label">Pregunta 3 de 3</p>
+        <svg class="mascot-svg">
+            <use href="#ic-owl" />
+        </svg>
+        <p class="question-text">¿Qué red social introdujo las "Historias" por primera vez?</p>
+        <div class="options-grid">
+            <button class="option-btn" data-q="3" data-correct="false"><span
+                    class="option-letter">A</span>Instagram</button>
+            <button class="option-btn" data-q="3" data-correct="true"><span
+                    class="option-letter">B</span>Snapchat</button>
+            <button class="option-btn" data-q="3" data-correct="false"><span
+                    class="option-letter">C</span>WhatsApp</button>
+            <button class="option-btn" data-q="3" data-correct="false"><span
+                    class="option-letter">D</span>Facebook</button>
+        </div>
+        <div class="feedback-banner" id="fb3">
+            <svg class="fb-icon" id="fbIcon3">
+                <use href="#ic-check" />
+            </svg>
+            <div class="feedback-text">
+                <span class="feedback-title" id="fbTitle3"></span>
+                <span class="feedback-sub" id="fbSub3"></span>
+            </div>
+        </div>
+        <button class="continue-btn green" id="cont3">Ver resultados</button>
+    </div>
+
+    <!-- ===== FINAL ===== -->
+    <div class="screen" id="screenFinal">
+        <div class="final-screen">
+            <div class="trophy-wrap">
+                <div class="trophy-ring"></div>
+                <div class="trophy-ring-2"></div>
+                <svg class="trophy-svg-el">
+                    <use href="#ic-trophy" />
+                </svg>
+            </div>
+            <p class="mid-badge">Lección completada</p>
+            <p class="final-title">Eres un crack<br>de las redes</p>
+            <p class="final-sub" id="finalSub">Lo hiciste excelente. Seguí aprendiendo para desbloquear nuevos temas.
+            </p>
+            <div class="final-stats">
+                <div class="fstat gold">
+                    <svg class="fstat-icon">
+                        <use href="#ic-star" />
+                    </svg>
+                    <div class="fstat-num" id="scoreNum">0/3</div>
+                    <div class="fstat-label">Correctas</div>
+                </div>
+                <div class="fstat green">
+                    <svg class="fstat-icon">
+                        <use href="#ic-bolt" />
+                    </svg>
+                    <div class="fstat-num" id="xpNum">+30</div>
+                    <div class="fstat-label">XP ganado</div>
+                </div>
+                <div class="fstat purple">
+                    <svg class="fstat-icon">
+                        <use href="#ic-flame" />
+                    </svg>
+                    <div class="fstat-num">1</div>
+                    <div class="fstat-label">Racha</div>
+                </div>
+            </div>
+            <button class="restart-btn" id="restartBtn">Jugar de nuevo</button>
+            <button class="restart-outline" id="shareBtn">
+                <svg class="share-icon">
+                    <use href="#ic-share" />
+                </svg>
+                Compartir resultado
+            </button>
+        </div>
+    </div>
+
+    <script src="/js/quizz.js"></script>
+</body>
+
+</html>

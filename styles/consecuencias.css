@@ -1,0 +1,165 @@
+        :root {
+            --apple-bg: #000000;
+            --apple-text: #f5f5f7;
+            --apple-sub: #86868b;
+            --apple-blue: #0a84ff;
+            --apple-purple: #bf5af2;
+            --apple-red: #ff453a;
+            --apple-green: #30d158;
+            --glass: rgba(255, 255, 255, 0.02);
+            --glass-border: rgba(255, 255, 255, 0.1);
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, sans-serif;
+            background-color: var(--apple-bg);
+            color: var(--apple-text);
+            overflow-x: hidden;
+            scroll-behavior: smooth;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        /* --- Estética de Fondo Pro --- */
+        .mesh-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background:
+                radial-gradient(circle at 10% 10%, rgba(10, 132, 255, 0.1) 0%, transparent 40%),
+                radial-gradient(circle at 90% 90%, rgba(191, 90, 242, 0.1) 0%, transparent 40%);
+            z-index: -1;
+        }
+
+        .grid-overlay {
+            position: fixed;
+            inset: 0;
+            background-image: radial-gradient(circle, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+            background-size: 40px 40px;
+            z-index: -1;
+            mask-image: linear-gradient(to bottom, transparent, black, transparent);
+        }
+
+        /* --- Navegación Flotante Minimalista --- */
+        .nav-float {
+            position: fixed;
+            top: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 1000;
+            background: rgba(10, 10, 10, 0.5);
+            backdrop-filter: blur(30px) saturate(180%);
+            padding: 6px;
+            border-radius: 50px;
+            border: 1px solid var(--glass-border);
+            display: flex;
+            gap: 4px;
+        }
+
+        .nav-item {
+            padding: 10px 24px;
+            border-radius: 40px;
+            font-size: 13px;
+            font-weight: 500;
+            color: var(--apple-sub);
+            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .nav-item:hover {
+            color: white;
+            background: rgba(255, 255, 255, 0.08);
+        }
+
+        .nav-item.active {
+            background: white;
+            color: black;
+            box-shadow: 0 4px 15px rgba(255, 255, 255, 0.2);
+        }
+
+        /* --- Arquitectura de Tarjetas --- */
+        .section-container {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            padding: 160px 0;
+        }
+
+        .glass-card {
+            background: var(--glass);
+            border: 1px solid var(--glass-border);
+            border-radius: 40px;
+            padding: 80px;
+            backdrop-filter: blur(40px);
+            position: relative;
+            overflow: hidden;
+            transition: transform 0.8s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.4s ease;
+        }
+
+        .glass-card:hover {
+            border-color: rgba(255, 255, 255, 0.2);
+            transform: translateY(-5px);
+        }
+
+        /* --- Tipografía High-End --- */
+        .hero-title {
+            font-size: clamp(3.5rem, 10vw, 7.5rem);
+            line-height: 0.9;
+            letter-spacing: -0.05em;
+            font-weight: 900;
+        }
+
+        .section-tag {
+            font-size: 11px;
+            letter-spacing: 0.3em;
+            font-weight: 800;
+            text-transform: uppercase;
+            color: var(--apple-blue);
+            margin-bottom: 2rem;
+            display: block;
+        }
+
+        /* --- Visualizadores --- */
+        #dopamine-canvas {
+            width: 100%;
+            height: 450px;
+            border-radius: 32px;
+            background: radial-gradient(circle at center, rgba(10, 132, 255, 0.05) 0%, transparent 70%);
+            position: relative;
+            overflow: hidden;
+            border: 1px solid rgba(255, 255, 255, 0.03);
+        }
+
+        .particle {
+            position: absolute;
+            background: var(--apple-blue);
+            border-radius: 50%;
+            filter: blur(6px);
+            box-shadow: 0 0 25px var(--apple-blue);
+            opacity: 0.6;
+        }
+
+        /* --- Gráficos de Datos --- */
+        .insight-card {
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid var(--glass-border);
+            padding: 30px;
+            border-radius: 32px;
+            transition: all 0.4s ease;
+        }
+
+        .insight-card:hover {
+            background: rgba(255, 255, 255, 0.04);
+            transform: scale(1.02);
+        }
+
+        /* --- Scrollbar --- */
+        ::-webkit-scrollbar {
+            width: 4px;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: #444;
+            border-radius: 10px;
+        }
