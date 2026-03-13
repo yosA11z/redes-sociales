@@ -19,10 +19,10 @@
 
     <!-- Navegación Flotante -->
     <nav class="nav-float">
-        <a href="/index.html" class="nav-item">Inicio</a>
         <a href="#biologico" class="nav-item">Biológico</a>
         <a href="#psicologico" class="nav-item">Psicológico</a>
         <a href="#social" class="nav-item">Social</a>
+        <a href="#casos" class="nav-item">Casos</a>
     </nav>
 
     <main class="max-w-7xl mx-auto px-6">
@@ -201,9 +201,58 @@
                 </div>
             </div>
         </section>
+        <section id="casos" class="section-container">
+            <div class="mb-12">
+                <span class="section-tag" style="color: var(--apple-red)">Evidencia Directa</span>
+                <h2 class="text-6xl font-black tracking-tighter">Cuando el Algoritmo <br><span
+                        class="text-red-500">falla a la humanidad.</span></h2>
+            </div>
+
+            <div class="glass-card border-red-500/20"
+                style="background: linear-gradient(145deg, rgba(255, 69, 58, 0.05) 0%, transparent 100%);">
+                <div class="grid md:grid-cols-2 gap-16 items-center">
+                    <!-- Columna izquierda: historia -->
+                    <div>
+                        <div
+                            class="inline-flex items-center px-4 py-1.5 rounded-full bg-red-500/10 text-red-500 text-[10px] font-black tracking-widest uppercase mb-8">
+                            Caso Documentado
+                        </div>
+                        <h3 class="text-4xl font-bold mb-6">Molly Russell: El abismo algorítmico</h3>
+                        <p class="text-zinc-400 text-lg font-light leading-relaxed mb-8">
+                            En 2017, Molly Russell, una niña británica de 14 años, se quitó la vida tras ser expuesta
+                            masivamente a contenido que glorificaba la autolesión y el suicidio en Instagram y
+                            Pinterest.
+                            <br><br>
+                            La investigación judicial concluyó que Molly no solo buscó el contenido, sino que
+                            <strong>los
+                                algoritmos de recomendación le enviaron proactivamente material depresivo</strong>,
+                            creando un
+                            bucle del que no pudo escapar. Fue el primer caso en el que se dictaminó oficialmente que
+                            las redes sociales contribuyeron a la muerte de una menor.
+                        </p>
+                        <div class="flex items-center gap-4 text-red-400/60 font-medium">
+                            <i data-lucide="AlertTriangle"></i>
+                            <span class="text-xs uppercase tracking-widest">Advertencia de contenido sensible</span>
+                        </div>
+                    </div>
+
+                    <!-- Columna derecha: imagen + frase -->
+                    <div class="relative">
+                        <div
+                            class="aspect-square rounded-3xl overflow-hidden border border-white/10 bg-zinc-900 flex flex-col items-center justify-center p-4 text-center">
+                            <img src="https://imagenes.elpais.com/resizer/v2/BNYJIGU7VNCNTEXLNSL7NP7NTI.jpg?auth=508294cc9d2e0ed1999b096ce424c4995bad075bcfa032e0e7ad6a6b505fbd5c&width=1200"
+                                alt="Imagen descriptiva" class="w-full h-auto rounded-2xl mb-6 object-cover">
+                            <p class="text-zinc-500 italic">"El algoritmo no tiene moralidad, solo tiene objetivos de
+                                retención."</p>
+                        </div>
+                        <div class="absolute -bottom-6 -right-6 w-32 h-32 bg-red-500/20 blur-3xl -z-10"></div>
+                    </div>
+                </div>
+            </div>
+        </section>
 
         <!-- CTA FINAL -->
-        <section class="section-container text-center py-40">
+        <section id="cta" class="section-container text-center py-40">
             <div class="relative inline-block mb-12">
                 <div class="absolute inset-0 bg-blue-500/10 blur-[120px]"></div>
                 <h2 class="text-7xl font-black tracking-tighter relative">¿Controlas tú <br>al algoritmo?</h2>
